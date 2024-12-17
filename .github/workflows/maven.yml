@@ -44,7 +44,7 @@ jobs:
         run: |
           echo "Current file: '$FILE'"
           for FILE in $CHANGED_FILES; do
-            if [[ "$FILE" == "maven.yml" ]]; then
+            if [[ "$FILE" =~ \.yml$ ]]; then
               echo "Skipping $FILE"
               continue
             fi
