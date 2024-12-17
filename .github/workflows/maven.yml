@@ -30,9 +30,14 @@ jobs:
           CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- .)
           echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
 
+      - name: Add SSH Host Key
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_IP }} >> ~/.ssh/known_hosts
+
       - name: Upload Each File
         run: |
           for FILE in $CHANGED_FILES; do
             echo "Processing $FILE"
-            scp -P ${{ secrets.SSH_PORT }} -i <(echo "${{ secrets.SSH_KEY }}") $FILE ${{ secrets.SSH_ID }}@${{ secrets.SSH_IP }}:~/script/
+            scp -P ${{ secrets.SSH_PORT }} -i ssh_key.pem "$FILE" ${{ secrets.SSH_ID }}@${{ secrets.SSH_IP }}:~/script/
           done
