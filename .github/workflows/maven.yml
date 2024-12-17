@@ -27,6 +27,7 @@ jobs:
       - name: Get Changed Files
         id: get-changed-files
         run: |
+          cd ..
           CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- .)
           echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
 
