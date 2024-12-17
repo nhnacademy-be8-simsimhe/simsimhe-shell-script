@@ -30,6 +30,11 @@ jobs:
           CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- .)
           echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
 
+      - name: Create SSH Key File
+        run: |
+          echo "${{ secrets.SSH_KEY }}" > ssh_key.pem
+          chmod 600 ssh_key.pem
+
       - name: Add SSH Host Key
         run: |
           mkdir -p ~/.ssh
