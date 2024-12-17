@@ -43,7 +43,12 @@ jobs:
       - name: Upload Each File
         run: |
           for FILE in $CHANGED_FILES; do
-            echo "Processing $FILE"
+            if [[ "$FILE" == "maven.yml" ]]; then
+              echo "Skipping $FILE"
+              continue
+            fi
+            
+            echo "Uploading $FILE"
             scp -P ${{ secrets.SSH_PORT }} -i ssh_key.pem "$FILE" ${{ secrets.SSH_ID }}@${{ secrets.SSH_IP }}:~/script/
           done
 
