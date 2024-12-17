@@ -1,6 +1,7 @@
 ports=("8080" "8081")
 ip="127.0.0.1"
 
+
 # 8080과 8081포트에 spring boot가 띄워져 있는지 확인
 for port in "${ports[@]}";
 do
