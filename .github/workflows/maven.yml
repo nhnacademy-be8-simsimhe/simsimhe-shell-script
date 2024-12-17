@@ -41,3 +41,5 @@ jobs:
             echo "Processing $FILE"
             scp -P ${{ secrets.SSH_PORT }} -i ssh_key.pem "$FILE" ${{ secrets.SSH_ID }}@${{ secrets.SSH_IP }}:~/script/
           done
+
+          rm -f ssh_key.pem
