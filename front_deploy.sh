@@ -2,7 +2,6 @@ ports=("8080" "8081")
 ip="127.0.0.1"
 new_port= 3000
 
-
 for port in "${ports[@]}";
 do
   echo -e "http://$ip:$port/management/health_check"
