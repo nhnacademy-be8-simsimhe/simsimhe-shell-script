@@ -1,6 +1,5 @@
-ports=("8080" "8081")
+ports=("3000" "3001")
 ip="127.0.0.1"
-new_port= 3000
 
 
 for port in "${ports[@]}";
@@ -23,17 +22,17 @@ do
     sleep 5
 
     echo -e "jar파일을 $port포트에 실행합니다."
-    nohup java -jar -Dserver.port=${new_port} ~/target/front-server-0.0.1-SNAPSHOT.jar > log 2>&1 &
+    nohup java -jar -Dserver.port=${port} ~/target/front-server-0.0.1-SNAPSHOT.jar > log 2>&1 &
 
     for retry in {1..10}
     do
-      RESPONSE=$(curl -s http://$ip:$new_port/management/health_check)
+      RESPONSE=$(curl -s http://$ip:$port/management/health_check)
       PORT_HEALTH=$(echo ${RESPONSE} | grep 'UP' | wc -l)
       if [ $PORT_HEALTH -eq 1 ];
       then
         break
       else
-        echo -e "$ip:$new_port가 켜져있지 않습니다. 10초 슬립하고 다시 헬스체크를 수행합니다."
+        echo -e "$ip:$port가 켜져있지 않습니다. 10초 슬립하고 다시 헬스체크를 수행합니다."
         sleep 10
       fi
     done
@@ -54,10 +53,9 @@ do
     sudo nginx -s reload
     sleep 5
   else
-    echo -e "$new_port포트에 spring boot가 실행중이 아닙니다."
+    echo -e "$port포트에 spring boot가 실행중이 아닙니다."
     exit 0
   fi
-  new_port = 3001
 done
 
 
