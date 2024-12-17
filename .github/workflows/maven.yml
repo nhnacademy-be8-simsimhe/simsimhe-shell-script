@@ -27,7 +27,7 @@ jobs:
       - name: Get Changed Files
         id: get-changed-files
         run: |
-          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- .)
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- . | tr '\n' ' ')
           echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
 
       - name: Create SSH Key File
