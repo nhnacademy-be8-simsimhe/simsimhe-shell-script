@@ -6,7 +6,7 @@ ip="127.0.0.1"
 
 echo -e "$ip:$SERVICE_PORT의 auth-server를 종료합니다."
 fuser -s -k -TERM $SERVICE_PORT/tcp
-sleep 5
+sleep 10
 
 
 
@@ -23,13 +23,13 @@ do
     break
   else
     echo -e "$ip:$SERVICE_PORT가 켜져있지 않습니다. 10초 슬립하고 다시 헬스체크를 수행합니다."
-    sleep 5
+    sleep 10
   fi
 done
 
 echo -e "$ip:$TMP_PORT의 auth-server를 종료합니다."
 fuser -s -k -TERM $TMP_PORT/tcp
-sleep 5
+sleep 10
 
 
 

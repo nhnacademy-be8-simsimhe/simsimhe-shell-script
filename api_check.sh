@@ -62,9 +62,19 @@ do
     break
   else
     echo -e "$ip:$TMP_PORT가 켜져있지 않습니다. 10초 슬립하고 다시 헬스체크를 수행합니다."
-    sleep 5
+    sleep 10
   fi
 done
+
+RESPONSE=$(curl -s http://$ip:$TMP_PORT/management/health)
+PORT_HEALTH=$(echo ${RESPONSE} | grep 'UP' | wc -l)
+if [ $PORT_HEALTH -eq 1 ];
+    then
+      echo -e "$ip:$TMP_PORT에 정상적으로 api-server가 실행 중입니다."
+    else
+      echo -e "$ip:$TMP_PORT에 정상적으로 api-server가 실행 중이 아닙니다."
+      exit 0
+fi
 
 
 
