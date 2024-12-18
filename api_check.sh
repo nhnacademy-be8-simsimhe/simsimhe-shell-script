@@ -13,7 +13,7 @@ then
 else
   echo -e "$SERVICE_PORT에 api-server가 실행 중이 아닙니다."
   echo -e "$SERVICE_PORT에 api-server를 실행시킵니다."
-  java -jar -Dserver.port=${SERVICE_PORT} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY} -Dspring.profiles.active=prod ~/target/api-server-0.0.1-SNAPSHOT.jar > /dev/null 2> ~/log/api_error.log &
+  java -jar -Dserver.port=${SERVICE_PORT} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY} -Dspring.profiles.active=prod ~/target/api-server-0.0.1-SNAPSHOT.jar > ~/log/api_output.log 2> ~/log/api_error.log &
   sleep 5
 
   for retry in {1..10}
@@ -29,6 +29,9 @@ else
     fi
   done
 fi
+
+RESPONSE=$(curl -s http://$ip:$SERVICE_PORT/management/health)
+PORT_HEALTH=$(echo ${RESPONSE} | grep 'UP' | wc -l)
 
 if [ $PORT_HEALTH -eq 1 ];
 then

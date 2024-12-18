@@ -14,7 +14,7 @@ then
 else
   echo -e "$SERVICE_PORT에 auth-server가 실행 중이 아닙니다."
   echo -e "$SERVICE_PORT에 auth-server를 실행시킵니다."
-  java -jar -Dserver.port=${SERVICE_PORT} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY}  ~/target/account-server-0.0.1-SNAPSHOT.jar > /dev/null 2> ~/log/auth_error.log &
+  java -jar -Dserver.port=${SERVICE_PORT} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY}  ~/target/account-server-0.0.1-SNAPSHOT.jar > ~/log/auth_output.log 2> ~/log/auth_error.log &
   sleep 5
 
   for retry in {1..10}

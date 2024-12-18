@@ -11,7 +11,7 @@ sleep 5
 
 
 echo -e "$ip:$SERVICE_PORT에 auth-server를 실행시킵니다."
-java -jar -Dserver.port=${SERVICE_PORT} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY}  ~/target/account-server-0.0.1-SNAPSHOT.jar > /dev/null 2> ~/log/auth_error.log &
+java -jar -Dserver.port=${SERVICE_PORT} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY}  ~/target/account-server-0.0.1-SNAPSHOT.jar > ~/log/auth_output.log 2> ~/log/auth_error.log &
 sleep 10
 
 echo -e "$ip:$TMP_PORT의 auth-server를 종료합니다."
