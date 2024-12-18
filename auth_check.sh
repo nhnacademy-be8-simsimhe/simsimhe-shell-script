@@ -31,6 +31,9 @@ else
   done
 fi
 
+RESPONSE=$(curl -s http://$ip:$SERVICE_PORT/management/health)
+PORT_HEALTH=$(echo ${RESPONSE} | grep 'UP' | wc -l)
+
 if [ $PORT_HEALTH -eq 1 ];
 then
   echo -e "$ip:$SERVICE_PORT에 정상적으로 auth-server가 실행 중입니다."
