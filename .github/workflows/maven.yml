@@ -29,5 +29,5 @@ jobs:
       - name: Sync Files with Rsync
         run: |
           echo "Syncing files to remote server..."
-          rsync -avz --no-perms --include '*.sh' --exclude '*' -e "ssh -p ${{ secrets.SSH_PORT }} -i ssh_key.pem" . ${{ secrets.SSH_ID }}@${{ secrets.SSH_IP }}:~/script/
+          rsync -avz --checksum --no-perms --no-owner --no-group --stats --include '*.sh' --exclude '*' -e "ssh -p ${{ secrets.SSH_PORT }} -i ssh_key.pem" . ${{ secrets.SSH_ID }}@${{ secrets.SSH_IP }}:~/script/
           rm -f ssh_key.pem
