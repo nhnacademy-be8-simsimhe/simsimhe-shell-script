@@ -5,7 +5,7 @@ ip="127.0.0.1"
 for port in "${ports[@]}";
 do
   echo -e "http://$ip:$port/management/health_check"
-  RESPONSE=$(curl -s http://$ip:$port/management/health_check)
+  RESPONSE=$(curl -s http://$ip:$port/management/health)
   IS_ACTIVE=$(echo ${RESPONSE} | grep 'UP' | wc -l)
   if [ $IS_ACTIVE -eq 1 ];
   then
@@ -22,11 +22,11 @@ do
     sleep 5
 
     echo -e "jar파일을 $port포트에 실행합니다."
-    nohup java -jar -Dserver.port=${port} ~/target/front-server-0.0.1-SNAPSHOT.jar > log 2>&1 &
+    nohup java -jar -Dserver.port=${port} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY} ~/target/front-server-0.0.1-SNAPSHOT.jar &
 
     for retry in {1..10}
     do
-      RESPONSE=$(curl -s http://$ip:$port/management/health_check)
+      RESPONSE=$(curl -s http://$ip:$port/management/health)
       PORT_HEALTH=$(echo ${RESPONSE} | grep 'UP' | wc -l)
       if [ $PORT_HEALTH -eq 1 ];
       then
