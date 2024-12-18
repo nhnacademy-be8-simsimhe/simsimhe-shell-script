@@ -14,7 +14,7 @@ then
 else
   echo -e "$SERVICE_PORT에 auth-server가 실행 중이 아닙니다."
   echo -e "$SERVICE_PORT에 auth-server를 실행시킵니다."
-  nohup java -jar -Dserver.port=${SERVICE_PORT} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY}  ~/target/simsimhe-auth-server-0.0.1-SNAPSHOT.jar &
+  nohup java -jar -Dserver.port=${SERVICE_PORT} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY}  ~/target/account-server-0.0.1-SNAPSHOT.jar &
   sleep 5
 
   for retry in {1..10}
@@ -48,6 +48,6 @@ then
 fi
 
 echo -e "$ip:$TMP_PORT에 auth-server를 실행합니다."
-nohup java -jar -Dserver.port=${TMP_PORT} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY}  ~/target/simsimhe-auth-server-0.0.1-SNAPSHOT.jar &
+nohup java -jar -Dserver.port=${TMP_PORT} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY}  ~/target/account-server-0.0.1-SNAPSHOT.jar &
 sleep 5
 
