@@ -48,6 +48,11 @@ jobs:
               echo "Skipping $FILE"
               continue
             fi
+
+            if [ ! -f "$FILE" ]; then
+              echo "File no longer exists: $FILE"
+              continue
+            fi
             
             echo "Uploading $FILE"
             scp -P ${{ secrets.SSH_PORT }} -i ssh_key.pem "$FILE" ${{ secrets.SSH_ID }}@${{ secrets.SSH_IP }}:~/script/
