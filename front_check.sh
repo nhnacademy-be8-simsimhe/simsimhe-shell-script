@@ -17,7 +17,7 @@ do
   else
     echo -e "$port에 spring boot가 실행 중이 아닙니다."
     echo -e "$port에 spring boot를 실행시킵니다."
-    nohup java -jar -Dserver.port=${port} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY} -Dspring.profiles.active=prod ~/target/simsimhe-front-server-0.0.1-SNAPSHOT.jar &
+    java -jar -Dserver.port=${port} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY} -Dspring.profiles.active=prod ~/target/simsimhe-front-server-0.0.1-SNAPSHOT.jar &
     sleep 5
 
     for retry in {1..10}
