@@ -18,7 +18,7 @@ else
 
   for retry in {1..10}
   do
-    RESPONSE=$(curl -s http://$ip:$port/management/health)
+    RESPONSE=$(curl -s http://$ip:$SERVICE_PORT/management/health)
     PORT_HEALTH=$(echo ${RESPONSE} | grep 'UP' | wc -l)
     if [ $PORT_HEALTH -eq 1 ];
     then

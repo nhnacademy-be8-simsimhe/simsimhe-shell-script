@@ -13,7 +13,7 @@ java -jar -Dserver.port=${SERVICE_PORT} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_
 sleep 5
 
 echo -e "$ip:$TMP_PORT의 api-server를 종료합니다."
-fuser -s -k -TERM $SERVICE_PORT/tcp
+fuser -s -k -TERM $TMP_PORT/tcp
 sleep 5
 
 
