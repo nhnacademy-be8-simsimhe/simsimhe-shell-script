@@ -49,3 +49,6 @@ fi
 echo -e "$ip:$TMP_PORT에 api-server를 실행합니다."
 nohup java -jar -Dserver.port=${TMP_PORT} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY} -Dspring.profiles.active=prod ~/target/simsimhe-shop-api-server-0.0.1-SNAPSHOT.jar &
 sleep 5
+
+
+

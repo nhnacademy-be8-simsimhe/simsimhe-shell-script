@@ -35,3 +35,4 @@ else
   echo -e "$ip:$port에 정상적으로 spring cloud eureka server가 실행 중이 아닙니다."
   exit 0
 fi
+
