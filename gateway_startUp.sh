@@ -11,7 +11,7 @@ then
   sleep 5
 fi
 
-echo -e "$ip:$port에 spring cloud gateway server를 실행합니다."
+echo -e "$ip:$port에다 spring cloud gateway server를 실행합니다."
 nohup java -jar -Dserver.port=${port} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY}  ~/target/simsimhe-gateway-0.0.1-SNAPSHOT.jar &
 sleep 5
 
