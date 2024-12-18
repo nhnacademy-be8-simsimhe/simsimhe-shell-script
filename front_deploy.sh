@@ -23,6 +23,7 @@ do
 
     echo -e "jar파일을 $port포트에 실행합니다."
     nohup java -jar -Dserver.port=${port} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY} ~/target/front-server-0.0.1-SNAPSHOT.jar &
+    sleep 5
 
     for retry in {1..10}
     do
