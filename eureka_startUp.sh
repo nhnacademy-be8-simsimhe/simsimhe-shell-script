@@ -11,7 +11,7 @@ then
 fi
 
 echo -e "$ip:$port에 spring cloud eureka server를 실행합니다."
-java -jar -Dserver.port=${port} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY}  ~/target/eureka-0.0.1-SNAPSHOT.jar &
+java -jar -Dserver.port=${port} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY}  ~/target/eureka-0.0.1-SNAPSHOT.jar > /dev/null 2> ~/log/eureka_error.log &
 sleep 5
 
 for retry in {1..10}
