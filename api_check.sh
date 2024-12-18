@@ -50,8 +50,21 @@ then
 fi
 
 echo -e "$ip:$TMP_PORT에 api-server를 실행합니다."
-java -jar -Dserver.port=${TMP_PORT} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY} -Dspring.profiles.active=prod ~/target/api-server-0.0.1-SNAPSHOT.jar > /dev/null 2> ~/log/api_error.log &
-sleep 5
+java -jar -Dserver.port=${TMP_PORT} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY} -Dspring.profiles.active=prod ~/target/api-server-0.0.1-SNAPSHOT.jar > ~/log/api_output.log 2> ~/log/api_error.log &
+sleep 10
+
+for retry in {1..10}
+do
+  RESPONSE=$(curl -s http://$ip:$TMP_PORT/management/health)
+  PORT_HEALTH=$(echo ${RESPONSE} | grep 'UP' | wc -l)
+  if [ $PORT_HEALTH -eq 1 ];
+  then
+    break
+  else
+    echo -e "$ip:$TMP_PORT가 켜져있지 않습니다. 10초 슬립하고 다시 헬스체크를 수행합니다."
+    sleep 5
+  fi
+done
 
 
 
