@@ -1,5 +1,4 @@
-source variables
-
+source ~/variables
 port="8761"
 ip="127.0.0.1"
 

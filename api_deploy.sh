@@ -1,4 +1,4 @@
-source variables
+source ~/variables
 
 SERVICE_PORT="8010"
 TMP_PORT="8011"
