@@ -3,6 +3,9 @@ source ~/variables
 SERVICE_PORT="8010"
 TMP_PORT="8011"
 ip="127.0.0.1"
+echo -e "$ip:$SERVICE_PORT의 api-server의 down상태를 eureka서버에 알립니다"
+curl -X PUT "http://localhost:8761/eureka/apps/API-SERVER/API-SERVER-${SERVICE_PORT}/status?value=DOWN"
+sleep 10
 
 echo -e "$ip:$SERVICE_PORT의 api-server를 종료합니다."
 fuser -s -k -TERM $SERVICE_PORT/tcp
@@ -51,6 +54,9 @@ if [ $PORT_HEALTH -eq 1 ];
       exit 0
 fi
 
+echo -e "$ip:$TMP_PORT의 api-server의 down상태를 eureka서버에 알립니다"
+curl -X PUT "http://localhost:8761/eureka/apps/API-SERVER/API-SERVER-${TMP_PORT}/status?value=DOWN"
+sleep 10
 
 echo -e "$ip:$TMP_PORT의 api-server를 종료합니다."
 fuser -s -k -TERM $TMP_PORT/tcp
