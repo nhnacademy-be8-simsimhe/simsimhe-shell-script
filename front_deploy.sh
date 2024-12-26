@@ -24,7 +24,7 @@ do
     sleep 5
 
     echo -e "jar파일을 $port포트에 실행합니다."
-    java -jar -Dserver.port=${port} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY} -Dspring.profiles.active=prod ~/target/simsimhe-front-server-0.0.1-SNAPSHOT.jar > /dev/null 2> ~/log/front_error.log&
+    java -jar -Dserver.port=${port} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY} -Dspring.profiles.active=prod ~/target/front-server-0.0.1-SNAPSHOT.jar > /dev/null 2> ~/log/front_error.log&
     sleep 5
 
     for retry in {1..10}
