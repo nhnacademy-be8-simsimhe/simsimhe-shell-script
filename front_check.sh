@@ -7,7 +7,7 @@ ip="127.0.0.1"
 # 3000과 3001포트에 spring boot가 띄워져 있는지 확인!
 for port in "${ports[@]}";
 do
-  echo "http://$ip:$port/management/health_check"
+  echo "http://$ip:$port/management/health"
   RESPONSE=$(curl -s http://$ip:$port/management/health)
   IS_ACTIVE=$(echo ${RESPONSE} | grep 'UP' | wc -l)
 
@@ -17,7 +17,7 @@ do
   else
     echo -e "$port에 spring boot가 실행 중이 아닙니다."
     echo -e "$port에 spring boot를 실행시킵니다."
-    java -jar -Dserver.port=${port} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY} -Dspring.profiles.active=prod ~/target/front-server-0.0.1-SNAPSHOT.jar > /dev/null 2> ~/log/front_error.log &
+    java -Xmx512m -XX:MaxMetaspaceSize=256m -jar -Dserver.port=${port} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY} -Dspring.profiles.active=prod ~/target/front-server-0.0.1-SNAPSHOT.jar > /dev/null 2> ~/log/front_error.log &
     sleep 5
 
     for retry in {1..10}

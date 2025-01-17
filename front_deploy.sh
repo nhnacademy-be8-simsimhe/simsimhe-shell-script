@@ -17,14 +17,14 @@ do
 
     sudo nginx -t
     echo "nginx를 reload합니다."
-    sudo nginx -s reload
+    sudo systemctl reload nginx
     sleep 5
 
     fuser -s -k -TERM $port/tcp
     sleep 5
 
     echo -e "jar파일을 $port포트에 실행합니다."
-    java -jar -Dserver.port=${port} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY} -Dspring.profiles.active=prod ~/target/front-server-0.0.1-SNAPSHOT.jar > /dev/null 2> ~/log/front_error.log&
+    java -Xmx512m -XX:MaxMetaspaceSize=256m -jar -Dserver.port=${port} -DLOG_N_CRASH_APP_KEY=${LOG_N_CRASH_APP_KEY} -Dspring.profiles.active=prod ~/target/front-server-0.0.1-SNAPSHOT.jar > /dev/null 2> ~/log/front_error.log&
     sleep 5
 
     for retry in {1..10}
@@ -53,7 +53,7 @@ do
 
     sudo nginx -t
     echo "nginx를 reload합니다."
-    sudo nginx -s reload
+    sudo systemctl reload nginx
     sleep 5
   else
     echo -e "$port포트에 spring boot가 실행중이 아닙니다."
